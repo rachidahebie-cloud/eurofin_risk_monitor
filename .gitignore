@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+.DS_Store
+# NB : data/eurofin.db et models/*.joblib sont VOLONTAIREMENT versionnés
+# (mis à jour par GitHub Actions, lus par Streamlit Cloud)
