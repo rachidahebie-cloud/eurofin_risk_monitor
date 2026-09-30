@@ -14,6 +14,8 @@ def fetch_ecb_rate(start: str | None = None) -> pd.DataFrame:
         params["startPeriod"] = start
     resp = requests.get(ECB_URL, params=params, timeout=30)
     resp.raise_for_status()
+    if not resp.text.strip():  # aucune observation sur la période demandée
+        return pd.DataFrame(columns=["date", "rate"])
     df = pd.read_csv(io.StringIO(resp.text))
     out = df[["TIME_PERIOD", "OBS_VALUE"]].rename(
         columns={"TIME_PERIOD": "date", "OBS_VALUE": "rate"}

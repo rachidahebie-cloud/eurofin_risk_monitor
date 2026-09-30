@@ -58,8 +58,7 @@ def run() -> None:
     log.info("Extraction depuis %s", start)
     prices = clean_prices(fetch_prices(start))
     upsert("prices", prices)
-    upsert("ecb_rates", fetch_ecb_rate(start))
-
+    upsert("ecb_rates", fetch_ecb_rate())  # série complète : quelques lignes seulement
     full = read_sql("SELECT * FROM prices")
     full["date"] = pd.to_datetime(full["date"])
     rates = read_sql("SELECT * FROM ecb_rates")
